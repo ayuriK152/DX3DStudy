@@ -45,7 +45,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         }
         else
         {
-
+            game.Update();
+            game.Render();
         }
     }
 

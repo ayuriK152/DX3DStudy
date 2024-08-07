@@ -9,6 +9,9 @@
 #include <list>
 #include <map>
 #include <unordered_map>
+#include <memory>
+#include <string>
+#include <array>
 using namespace std;
 
 // WIN
@@ -35,3 +38,20 @@ using namespace Microsoft::WRL;
 #endif
 
 #define CHECK(p) assert(SUCCEEDED(p))
+
+// Engine
+#include "Graphics.h"
+#include "VertexBuffer.h"
+#include "IndexBuffer.h"
+#include "InputLayout.h"
+#include "Geometry.h"
+#include "GeometryHelper.h"
+#include "VertexData.h"
+#include "Shader.h"
+#include "ConstantBuffer.h"
+#include "Texture.h"
+#include "RasterizerState.h"
+#include "SamplerState.h"
+#include "BlendState.h"
+#include "Pipeline.h"
+#include "Transform.h"

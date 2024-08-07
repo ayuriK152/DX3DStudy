@@ -11,15 +11,26 @@ struct VS_OUTPUT
     float2 uv : TEXCOORD;
 };
 
-cbuffer TransformData : register(b0)
+cbuffer CameraData : register(b0)
 {
-    float4 offset;
+    row_major matrix matView;
+    row_major matrix matProjection;
+}
+
+cbuffer TransformData : register(b1)
+{
+    row_major matrix matWorld;
 }
 
 VS_OUTPUT VS(VS_INPUT input)
 {
     VS_OUTPUT output;
-    output.position = input.position + offset;
+    
+    float4 position = mul(input.position, matWorld);
+    position = mul(position, matView);
+    position = mul(position, matProjection);
+    
+    output.position = position;
     output.uv = input.uv;
     
     return output;

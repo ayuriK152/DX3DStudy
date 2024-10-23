@@ -8,6 +8,7 @@
 #include "ResourceManager.h"
 #include "Game.h"
 #include "Mesh.h"
+#include "Animator.h"
 
 SceneManager::SceneManager(shared_ptr<Graphics> graphics) : _graphics(graphics) {
 	
@@ -50,21 +51,54 @@ std::shared_ptr<Scene> SceneManager::LoadTestScene() {
 		scene->AddGameObject(camera);
 	}
 
-	shared_ptr<GameObject> tempObj = make_shared<GameObject>(_graphics->GetDevice(), _graphics->GetDeviceContext());
 	{
-		tempObj->GetOrAddTransform();
+		shared_ptr<GameObject> tempObj = make_shared<GameObject>(_graphics->GetDevice(), _graphics->GetDeviceContext());
+		{
+			tempObj->GetOrAddTransform();
 
-		auto meshRenderer = make_shared<MeshRenderer>(_graphics->GetDevice(), _graphics->GetDeviceContext());
-		tempObj->AddComponent(meshRenderer);
+			auto meshRenderer = make_shared<MeshRenderer>(_graphics->GetDevice(), _graphics->GetDeviceContext());
+			tempObj->AddComponent(meshRenderer);
 
-		auto material = RESOURCES->Get<Material>(L"Default");
-		meshRenderer->SetMaterial(material);
+			auto material = RESOURCES->Get<Material>(L"Default");
+			meshRenderer->SetMaterial(material);
 
-		auto mesh = RESOURCES->Get<Mesh>(L"Rectangle");
-		meshRenderer->SetMesh(mesh);
+			auto mesh = RESOURCES->Get<Mesh>(L"Rectangle");
+			meshRenderer->SetMesh(mesh);
 
+		}
+		{
+			auto animator = make_shared<Animator>();
+			tempObj->AddComponent(animator);
+			auto anim = RESOURCES->Get<Animation>(L"SnakeAnim");
+			animator->SetAnimation(anim);
+		}
+		scene->AddGameObject(tempObj);
 	}
-	scene->AddGameObject(tempObj);
+
+	{
+		shared_ptr<GameObject> tempObj = make_shared<GameObject>(_graphics->GetDevice(), _graphics->GetDeviceContext());
+		tempObj->GetOrAddTransform()->SetPosition(Vec3{ 1.0f, 1.0f, 1.0f });
+		{
+			tempObj->GetOrAddTransform();
+
+			auto meshRenderer = make_shared<MeshRenderer>(_graphics->GetDevice(), _graphics->GetDeviceContext());
+			tempObj->AddComponent(meshRenderer);
+
+			auto material = RESOURCES->Get<Material>(L"Default");
+			meshRenderer->SetMaterial(material);
+
+			auto mesh = RESOURCES->Get<Mesh>(L"Rectangle");
+			meshRenderer->SetMesh(mesh);
+
+		}
+		{
+			auto animator = make_shared<Animator>();
+			tempObj->AddComponent(animator);
+			auto anim = RESOURCES->Get<Animation>(L"SnakeAnim");
+			animator->SetAnimation(anim);
+		}
+		scene->AddGameObject(tempObj);
+	}
 
 	return scene;
 }

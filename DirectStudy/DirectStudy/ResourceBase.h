@@ -26,8 +26,8 @@ public:
 	uint8 GetID() { return _id; }
 
 protected:
-	virtual void Load(const wstring path) { }
-	virtual void Save(const wstring path) { }
+	virtual void Load(const wstring& path) { }
+	virtual void Save(const wstring& path) { }
 
 protected:
 	ResourceType _type = ResourceType::None;

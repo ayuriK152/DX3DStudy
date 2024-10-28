@@ -1,4 +1,5 @@
 #pragma once
+#include "IExecute.h"
 
 class TriangleDemo : public IExecute
 {

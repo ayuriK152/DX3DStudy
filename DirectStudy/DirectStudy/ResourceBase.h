@@ -21,8 +21,8 @@ public:
 
 	ResourceType GetType() { return _type; }
 
-	void SetName(const wstring name) { _name = name; }
-	const wstring GetName() { return _name; }
+	void SetName(const wstring& name) { _name = name; }
+	const wstring& GetName() { return _name; }
 	uint8 GetID() { return _id; }
 
 protected:

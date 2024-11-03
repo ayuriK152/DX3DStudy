@@ -13,9 +13,9 @@ void TextureDemo::Init()
 
 	_geometry = make_shared<Geometry<VertexTextureData>>();
 	//GeometryHelper::CreateQuad(_geometry);
-	//GeometryHelper::CreateCube(_geometry);
+	GeometryHelper::CreateCube(_geometry);
 	//GeometryHelper::CreateSphere(_geometry);
-	GeometryHelper::CreateGrid(_geometry, 256, 256);
+	//GeometryHelper::CreateGrid(_geometry, 256, 256);
 	_vertexBuffer = make_shared<VertexBuffer>();
 	_vertexBuffer->Create(_geometry->GetVertices());
 	_indexBuffer = make_shared<IndexBuffer>();
@@ -28,7 +28,8 @@ void TextureDemo::Init()
 	_camera->AddComponent(make_shared<CameraScript>());
 	_camera->GetTransform()->SetLocalPosition(Vec3(0.f, 0.f, -5.f));
 
-	_texture = RESOURCES->Load<Texture>(L"mari", L"..\\Resources\\Textures\\mari.png");
+	//_texture = RESOURCES->Load<Texture>(L"mari", L"..\\Resources\\Textures\\mari.png");
+	_texture = RESOURCES->Load<Texture>(L"koyuki", L"..\\Resources\\Textures\\koyuki.png");
 }
 
 void TextureDemo::Update()
